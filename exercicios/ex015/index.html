@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Verificador de Idade</title>
+	<link rel="stylesheet" href="style.css" type="text/css" media="all" />
+</head>
+<body>
+	<header>
+		<h1>Verificador de Idade</h1>
+	</header>
+	<section>
+		<div>
+			<p>Ano de Nascimento:
+				<input type="number" name="txt-year" id="txt-year" min="0" />
+			</p>
+			<p>Sexo:
+				<input type="radio" name="gender" id="male-gender" checked />
+				<label for="male-gender">Masculino</label>
+				
+				<input type="radio" name="gender" id="female-gender" />
+				<label for="female-gender">Feminino</label>
+			</p>
+			<p>
+				<input type="button" value="Verificar" onclick="verify()" />
+			</p>
+		</div>
+		<div id="result">
+			
+		</div>
+	</section>
+	<footer>
+		<p>&copy; 2026 Nadson de Jesus Almeida</p>
+	</footer>
+	<script src="script.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

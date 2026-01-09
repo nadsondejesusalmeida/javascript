@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Qual é o seu país?</title>
+</head>
+<body>
+	<h1>Diga o seu país</h1>
+	<input type="text" name="txt-country" id="txt-country" />
+	<input type="button" id="check" value="Verificar" onclick="verifyCountry()" />
+	<div id="result"></div>
+	
+	<script>
+		function verifyCountry() {
+			var txtCountry = window.document.querySelector('input#txt-country');
+			var result = window.document.querySelector('div#result');
+			var country = txtCountry.value;
+			
+			result.innerHTML = `<p>Vivendo em ${country}.</p>`;
+			
+			if (country != 'Brasil') {
+				result.innerHTML += `<p>Você é um estrangeiro!</p>`;
+			} else {
+				result.innerHTML += `<p>Você é um brasileiro!</p>`;
+			}
+		}
+	</script>
+</body>
+</html>

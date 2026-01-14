@@ -8,4 +8,6 @@ let friend = {
 	}
 }
 
+friend.gainWeight(2);
+
 console.log(`O nome do meu amigo é ${friend.name}! A massa corporal dele é ${friend.mass}Kg.`);

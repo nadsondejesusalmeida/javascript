@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Mensagens</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Desafio das Mensagens</h1>
+	<button type="button"></button>
+	<button type="button"></button>
+	<button type="button"></button>
+	<script>
+		const buttonsElements = document.getElementsByTagName('button');
+		
+		for (let index = 0; index < buttonsElements.length; index++) {
+			const buttonClicked = buttonsElements[index];
+			const buttonNumber = index + 1;
+			
+			buttonClicked.innerText = `Botão ${buttonNumber}`;
+			
+			buttonClicked.addEventListener('click', () => {
+				alert(`Você clicou no ${buttonNumber}º botão!`);
+			});
+		}
+	</script>
+</body>
+</html>

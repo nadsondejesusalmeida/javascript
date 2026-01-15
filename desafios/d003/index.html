@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Antes e Depois</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Antes e Depois</h1>
+	<button type="button" onclick="requestWholeNumber()">Antecessor e Sucessor</button>
+	<script>
+		function requestWholeNumber() {
+			const numberProvided = parseInt(prompt('Digite um número inteiro qualquer')) || 0;
+			const antecessorOfTheGivenNumber = numberProvided - 1;
+			const successorToTheGivenNumber = numberProvided + 1;
+			
+			alert(`Antes do ${numberProvided}, temos o número ${antecessorOfTheGivenNumber}.\nDepois do ${numberProvided}, temos o número ${successorToTheGivenNumber}.`)
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Calcula Troco</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calculando o Troco</h1>
+	<button type="button" onclick="buyProduct()">Comprar produto</button>
+	<script>
+		function buyProduct() {
+			const productName = prompt('Que produto você está comprando?') || 'produto desconhecido';
+			let productPrice = Number(prompt(`Quanto custa ${productName} que você está comprando?`).replace(',', '.'));
+			
+			if (isNaN(productPrice)) {
+				alert('Você não informou o preço do produto!')
+			} else {
+				const moneyReceived = Number(prompt(`Qual foi o valor que você deu para pagar ${productName}?`).replace(',', '.'));
+				
+				if (isNaN(moneyReceived)) {
+					alert('Você não informou quanto pagou pelo produto!');
+				} else {
+					const productPriceMessage = productPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+					const moneyReceivedMessage = moneyReceived.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+					let change;
+					let changeMessage;
+					
+					if (moneyReceived == productPrice || moneyReceived > productPrice) {
+						change = moneyReceived - productPrice;
+						
+						if (change == 0) {
+							changeMessage = 'nada';
+						} else {
+							changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+						}
+						
+						
+						alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e vai receber ${changeMessage} de troco.\nVolte Sempre!`);
+					} else {
+						change = productPrice - moneyReceived;
+						changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+						
+						alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e ainda precisará pagar ${changeMessage}!`);
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

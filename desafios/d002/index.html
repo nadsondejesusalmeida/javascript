@@ -17,9 +17,8 @@
 	<script>
 		function startChallenge() {
 			const username = prompt('Qual é o seu nome?') || 'usuário desconhecido';
-			const userAge = prompt(`Olá, ${username}! Quantos anos você tem?`) || null;
-			
-			userAgeMessage = userAge != null && !isNaN(userAge) ? `tem ${userAge} anos de idade` : `não tem uma idade definida`;
+			const userAge = parseInt(prompt(`Olá, ${username}! Quantos anos você tem?`));
+			const userAgeMessage = !isNaN(userAge) ? `tem ${userAge} anos de idade` : 'não tem uma idade definida';
 			
 			alert(`Acabei de conhecer ${username}, que ${userAgeMessage}!`);
 		}

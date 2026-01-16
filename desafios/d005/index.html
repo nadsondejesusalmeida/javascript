@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Conversor de medidas</title>
+	<style>
+		button {
+			margin: 15px 0;
+			padding: 15px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Conversor de Medidas</h1>
+	<button type="button" onclick="convertDistanceMeasurement()">Converter</button>
+	<div id="result">
+		Clique no botão acima para iniciar.
+	</div>
+	<script>
+		function convertDistanceMeasurement() {
+			const result = document.getElementById('result');
+			let distanceInMeters = prompt('Digite uma distância em metros (m)');
+			distanceInMeters = distanceInMeters === null ? NaN : Number(distanceInMeters.replace(',', '.'));
+			
+			if (isNaN(distanceInMeters)) {
+				alert('Você não digitou uma distância em metros! Apenas informe o número.');
+				return;
+			}
+			
+			const distances = [
+				{
+					amount: distanceInMeters / 1000,
+					extension: 'quilômetros',
+					abbreviation: 'km'
+				},
+				{
+					amount: distanceInMeters / 100,
+					extension: 'hectômetros',
+					abbreviation: 'hm'
+				},
+				{
+					amount: distanceInMeters / 10,
+					extension: 'decâmetros',
+					abbreviation: 'dam'
+				},
+				{
+					amount: distanceInMeters * 10,
+					extension: 'decímetros',
+					abbreviation: 'dm'
+				},
+				{
+					amount: distanceInMeters * 100,
+					extension: 'centímetros',
+					abbreviation: 'cm'
+				},
+				{
+					amount: distanceInMeters * 1000,
+					extension: 'milímetros',
+					abbreviation: 'mm'
+				}
+			];
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>A distância de ${distanceInMeters.toLocaleString('pt-BR')} metros, corresponde a...</h2>`;
+			
+			for (let index = 0; index < distances.length; index++) {
+				const chosenDistance = distances[index];
+				
+				result.innerHTML += `<p>${chosenDistance.amount.toLocaleString('pt-BR')} ${chosenDistance.extension} (${chosenDistance.abbreviation})</p>`;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -17,40 +17,47 @@
 	<script>
 		function buyProduct() {
 			const productName = prompt('Que produto você está comprando?') || 'produto desconhecido';
-			let productPrice = Number(prompt(`Quanto custa ${productName} que você está comprando?`).replace(',', '.'));
+			let productPrice = prompt(`Quanto custa ${productName} que você está comprando?`);
 			
-			if (isNaN(productPrice)) {
-				alert('Você não informou o preço do produto!')
+			if (productPrice == null || isNaN(productPrice.replace(',', '.'))) {
+				alert('Você não informou o preço do produto!');
+				return;
 			} else {
-				const moneyReceived = Number(prompt(`Qual foi o valor que você deu para pagar ${productName}?`).replace(',', '.'));
-				
-				if (isNaN(moneyReceived)) {
-					alert('Você não informou quanto pagou pelo produto!');
-				} else {
-					const productPriceMessage = productPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-					const moneyReceivedMessage = moneyReceived.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-					let change;
-					let changeMessage;
-					
-					if (moneyReceived == productPrice || moneyReceived > productPrice) {
-						change = moneyReceived - productPrice;
-						
-						if (change == 0) {
-							changeMessage = 'nada';
-						} else {
-							changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-						}
-						
-						
-						alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e vai receber ${changeMessage} de troco.\nVolte Sempre!`);
-					} else {
-						change = productPrice - moneyReceived;
-						changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
-						
-						alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e ainda precisará pagar ${changeMessage}!`);
-					}
-				}
+				productPrice = Number(productPrice.replace(',', '.'));
 			}
+			
+			let moneyReceived = prompt(`Qual foi o valor que você deu para pagar ${productName}?`);
+			
+			if (moneyReceived == null || isNaN(moneyReceived.replace(',', '.'))) {
+				alert('Você não informou quanto pagou pelo produto!');
+				return;
+			} else {
+				moneyReceived = Number(moneyReceived.replace(',', '.'));
+			}
+			
+			const productPriceMessage = productPrice.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+			const moneyReceivedMessage = moneyReceived.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+			let change;
+			let changeMessage;
+			
+			if (moneyReceived >= productPrice) {
+				change = moneyReceived - productPrice;
+				
+				if (change == 0) {
+					changeMessage = 'nada';
+				} else {
+					changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+				}
+				
+				
+				alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e vai receber ${changeMessage} de troco.\nVolte Sempre!`);
+				return;
+			}
+			
+			change = productPrice - moneyReceived;
+			changeMessage = change.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+			
+			alert(`Você comprou ${productName} que custou ${productPriceMessage}.\nDeu ${moneyReceivedMessage} em dinheiro e ainda precisará pagar ${changeMessage}!`);
 		}
 	</script>
 </body>

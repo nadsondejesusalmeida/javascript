@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Conversor de temperaturas</title>
+	<style type="text/css" media="all">
+		button {
+			margin: 15px 0;
+			padding: 15px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Conversor de Temperaturas</h1>
+	<button type="button" onclick="convertTemperatureMeasurement()">Converter</button>
+	<div id="result">
+		Clique no botão acima para iniciar.
+	</div>
+	<script>
+		function convertTemperatureMeasurement() {
+			const result = document.querySelector('div#result');
+			let temperatureInCelsius = prompt('Digite uma temperatura em ºC (Celsius)');
+			temperatureInCelsius = temperatureInCelsius === null || temperatureInCelsius === '' ? NaN : Number(temperatureInCelsius.replace(',', '.'));
+			
+			if (isNaN(temperatureInCelsius)) {
+				alert('Você não informou uma temperatura em graus Celsius!');
+				return;
+			}
+			
+			let temperatureInFahrenheit = temperatureInCelsius * 1.8 + 32;
+			let temperaturaInKelvin = temperatureInCelsius + 273.15;
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>A temperatura de ${temperatureInCelsius.toLocaleString('pt-BR')}ºC, corresponde a...</h2>`;
+			result.innerHTML += `<p>${temperatureInFahrenheit.toLocaleString('pt-BR')}ºF (Fahrenheit)</p>`;
+			result.innerHTML += `<p>${temperaturaInKelvin.toLocaleString('pt-BR')}K (Kelvin)`;
+		}
+	</script>
+</body>
+</html>

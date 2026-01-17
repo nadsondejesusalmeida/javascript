@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Conversor R$ -&gt; US$</title>
+	<style>
+		button {
+			margin: 15px 0;
+			padding: 15px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Conversor R$ &rightarrow; US$</h1>
+	<button type="button" onclick="convertCurrency()">Converter</button>
+	<div id="result">
+		Clique no botão acima para iniciar.
+	</div>
+	<script>
+		let dollarExchangeRate = prompt('Antes de mais nada. Quanto está a cotação do dólar agora?');
+		
+		function convertCurrency() {
+			if (dollarExchangeRate === null || dollarExchangeRate === '') {
+				dollarExchangeRate = prompt('Antes de mais nada. Quanto está a cotação do dólar agora?');
+				return;
+			}
+			
+			dollarExchangeRate = dollarExchangeRate.replace(',', '.');
+			
+			if (isNaN(dollarExchangeRate)) {
+				dollarExchangeRate = prompt('Você não informou um número válido para a cotação do dólar. Informe usando apenas números.');
+				return;
+			}
+			
+			const result = document.querySelector('div#result');
+			let amountOfReais = prompt('Quantos R$ você tem na carteira?');
+			
+			if (amountOfReais === null || amountOfReais === '' || isNaN(amountOfReais.replace(',', '.'))) {
+				alert('Você não informou um número válido!');
+				return;
+			}
+			
+			amountOfReais = Number(amountOfReais.replace(',', '.'));
+			
+			const dollarConversion = amountOfReais / dollarExchangeRate;
+			
+			const amountOfReaisDisplay = amountOfReais.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+			const dollarConversionDisplay = dollarConversion.toLocaleString('pt-BR', {style: 'currency', currency: 'USD'});
+			
+			result.innerHTML = '';
+			result.innerHTML = `<p>${amountOfReaisDisplay} = ${dollarConversionDisplay}</p>`;
+		}
+	</script>
+</body>
+</html>

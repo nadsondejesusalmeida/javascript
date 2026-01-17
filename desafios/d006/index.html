@@ -33,13 +33,54 @@
 				return;
 			}
 			
-			let temperatureInFahrenheit = temperatureInCelsius * 1.8 + 32;
-			let temperaturaInKelvin = temperatureInCelsius + 273.15;
+			const temperatures = {
+				inFahrenheit: {
+					amount: temperatureInCelsius * 1.8 + 32,
+					extension: 'Fahrenheit',
+					abbreviation: 'ºF'
+				},
+				inKelvin: {
+					amount: temperatureInCelsius + 273.15,
+					extension: 'Kelvin',
+					abbreviation: 'K'
+				}
+			}
+			
+			let fractionalDigitNumbers = String(temperatureInCelsius).split('.');
+			
+			if (fractionalDigitNumbers[1]) {
+				fractionalDigitNumbers= fractionalDigitNumbers[1].length;
+			} else {
+				fractionalDigitNumbers = 0;
+			}
+			
+			const temperatureInCelsiusDisplay = temperatureInCelsius.toLocaleString('pt-BR', {
+				minimumFractionDigits: fractionalDigitNumbers,
+				maximumFractionDigits: fractionalDigitNumbers
+			});
 			
 			result.innerHTML = '';
-			result.innerHTML = `<h2>A temperatura de ${temperatureInCelsius.toLocaleString('pt-BR')}ºC, corresponde a...</h2>`;
-			result.innerHTML += `<p>${temperatureInFahrenheit.toLocaleString('pt-BR')}ºF (Fahrenheit)</p>`;
-			result.innerHTML += `<p>${temperaturaInKelvin.toLocaleString('pt-BR')}K (Kelvin)`;
+			result.innerHTML = `<h2>A temperatura de ${temperatureInCelsiusDisplay}ºC, corresponde a...</h2>`;
+			
+			for (let typeOfTemperature in temperatures) {
+				const selectedTemperature = temperatures[typeOfTemperature];
+				const selectedTemperatureAmount = selectedTemperature.amount;
+				
+				fractionalDigitNumbers = String(selectedTemperatureAmount).split('.');
+				
+				if (fractionalDigitNumbers[1]) {
+					fractionalDigitNumbers = fractionalDigitNumbers[1].length;
+				} else {
+					fractionalDigitNumbers = 0;
+				}
+				
+				selectedTemperature.display = selectedTemperatureAmount.toLocaleString('pt-BR', {
+					minimumFractionDigits: fractionalDigitNumbers,
+					maximumFractionDigits: fractionalDigitNumbers
+				});
+				
+				result.innerHTML += `<p>${selectedTemperature.display}${selectedTemperature.abbreviation} (${selectedTemperature.extension})`;
+			}
 		}
 	</script>
 </body>

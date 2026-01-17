@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Cálculo de Desconto</title>
+	<style>
+		button {
+			margin: 15px 0;
+			padding: 15px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Calcular Desconto</h1>
+	<button type="button" onclick="discountTenPercent()">Desconto de 10%</button>
+	<div id="result">
+		Clique no botão acima para iniciar.
+	</div>
+	<script>
+		function discountTenPercent() {
+			const result = document.querySelector('div#result');
+			let productName = prompt('Qual é o produto que você está comprando?') || '"produto desconhecido"';
+			let productPrice = prompt(`Qual é o preço de ${productName}?`);
+			productPrice = productPrice === null || productPrice === '' ? NaN : Number(productPrice.replace(',', '.'));
+			
+			if (isNaN(productPrice)) {
+				alert('Você não definiu um preço válido! Digite apenas o número.');
+				return;
+			}
+			
+			let moneySaved = Number((productPrice * 10) / 100);
+			let moneyToPay = Number(productPrice - moneySaved);
+			
+			moneySaved = moneySaved.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			moneyToPay = moneyToPay.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			productPrice = productPrice.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>Calculando desconto de 10% para ${productName}</h2>`;
+			result.innerHTML += `<p>O preço original era ${productPrice}</p>`;
+			result.innerHTML += `<p>Você acaba de ganhar ${moneySaved} de desconto (-10%)</p>`;
+			result.innerHTML += `<p>No fim, você vai pagar ${moneyToPay} no produto ${productName}</p>`;
+		}
+	</script>
+</body>
+</html>

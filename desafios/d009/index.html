@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Reajustar salário</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+		
+		#result {
+			margin-top: 15px;
+		}
+		
+		p {
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1>Reajuste salarial</h1>
+	<button type="button" onclick="adjustSalary()">Reajustar Salário</button>
+	<div id="result">
+		Clique no botão acima para iniciar.
+	</div>
+	<script>
+		function adjustSalary() {
+			const result = document.querySelector('#result');
+			
+			const employeeName = prompt('Qual é o nome do funcionário?') || '"funcionário desconhecido"';
+			
+			let employeeSalary = prompt(`Qual é o salário de ${employeeName}?`);
+			employeeSalary = employeeSalary === null || employeeSalary === '' ? NaN : Number(employeeSalary.replace(',', '.'));
+			
+			if (isNaN(employeeSalary)) {
+				alert(`Você não definiu qual é o salário atual de ${employeeName}!`);
+				return;
+			}
+			
+			let percentageOfTheAdjustment = prompt(`O salário de ${employeeName} vai ser reajustado em qual porcentagem?`);
+			percentageOfTheAdjustment = percentageOfTheAdjustment === null || percentageOfTheAdjustment === '' ? NaN : Number(percentageOfTheAdjustment.replace(',', '.'));
+			
+			if (isNaN(percentageOfTheAdjustment)) {
+				alert('Você não definiu o número da porcentagem do reajuste salarial!');
+				return;
+			}
+			
+			let salaryToEarn = (employeeSalary * percentageOfTheAdjustment) / 100;
+			let salaryToBeReceived = employeeSalary + salaryToEarn;
+			
+			employeeSalary = employeeSalary.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			percentageOfTheAdjustment = percentageOfTheAdjustment.toLocaleString('pt-BR');
+			
+			salaryToEarn = salaryToEarn.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			salaryToBeReceived = salaryToBeReceived.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>${employeeName} recebeu um reajuste salarial!</h2>`;
+			result.innerHTML += `<p>O salário atual era ${employeeSalary}.</p>`;
+			result.innerHTML += `<p>Com o reajuste de ${percentageOfTheAdjustment}%, o salário será ${salaryToEarn} no próximo mês.</p>`;
+			result.innerHTML += `<p>E a partir daí, ${employeeName} vai passar a ganhar ${salaryToBeReceived}.</p>`;
+		}
+	</script>
+</body>
+</html>

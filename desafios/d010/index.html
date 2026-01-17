@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Fórmula de Bhaskara</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+		
+		#result {
+			margin-top: 15px;
+		}
+		
+		var {
+			font-style: normal;
+		}
+	</style>
+</head>
+<body>
+	<h1>Resolvendo Bhaskara</h1>
+	<button type="button" onclick="calculateBhaskara()">Calcular</button>
+	<div id="result">
+		Considerando uma equação no formato <strong><var>a</var><sup>2</sup> + <var>b</var>x<sup>2</sup> + <var>c</var> = 0</strong>, aperte o botão acima para calcular o valor de &Delta; (delta).
+	</div>
+	<script>
+		function calculateBhaskara() {
+			const result = document.querySelector('#result');
+			
+			let coefficientA = prompt('Qual é o valor do coeficiente "a"?');
+			coefficientA = coefficientA === null || coefficientA === '' ? NaN : Number(coefficientA.replace(',', '.'));
+			
+			if (isNaN(coefficientA)) {
+				alert('Você não definiu um valor numérico válido para o coeficiente "a"!');
+				return;
+			}
+			
+			let coefficientB = prompt('Qual é o valor do coeficiente "b"?');
+			coefficientB = coefficientB === null || coefficientB === '' ? NaN : Number(coefficientB.replace(',', '.'));
+			
+			if (isNaN(coefficientB)) {
+				alert('Você não definiu um valor numérico válido para o coeficiente "b"!');
+				return;
+			}
+			
+			let coefficientC = prompt('Qual é o valor do coeficiente "c"?');
+			coefficientC = coefficientC === null || coefficientC === '' ? NaN : Number(coefficientC.replace(',', '.'));
+			
+			if (isNaN(coefficientC)) {
+				alert('Você não definiu um valor válido para o coeficiente "c"!');
+				return;
+			}
+			
+			let resultOfTheDeltaCalculation = (coefficientB ** 2) - (4 * coefficientA * coefficientC);
+			
+			coefficientA = coefficientA.toLocaleString('pt-BR');
+			coefficientB = coefficientB.toLocaleString('pt-BR');
+			coefficientC = coefficientC.toLocaleString('pt-BR');
+			resultOfTheDeltaCalculation = resultOfTheDeltaCalculation.toLocaleString('pt-BR');
+			
+			result.innerHTML = '';
+			result.innerHTML = '<h2>Resultado</h2>';
+			result.innerHTML += `<p>A equação atual é <strong>${coefficientA}x<sup>2</sup> + ${coefficientB}x + ${coefficientC} = 0</strong></p>`;
+			result.innerHTML += `<p>O cálculo realizado será <strong>&Delta; = ${coefficientB}<sup>2</sup> - 4 . ${coefficientA} . ${coefficientC}</strong></p>`;
+			result.innerHTML += `<p>O valor calculado foi <strong>&Delta; = ${resultOfTheDeltaCalculation}</strong></p>`;
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Ano Bissexto</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+		
+		#result {
+			margin-top: 15px;
+		}
+		
+		.is-leap-year,
+		.is-not-leap-year{
+			font-weight: bold;
+		}
+		
+		.is-leap-year {
+			background-color: #8BEC89;
+			color: #118B11;
+		}
+		
+		.is-not-leap-year {
+			background-color: #ED7F7E;
+			color: #95100E;
+		}
+	</style>
+</head>
+<body>
+	<h1>Ano Bissexto</h1>
+	<button type="button" onclick="checkLeapYear()">Verificar</button>
+	<div id="result">
+		Informe um ano para saber se é bissexto.
+	</div>
+	<script>
+		function checkLeapYear() {
+			const result = document.querySelector('#result');
+			let yearToBeVerified = prompt('Qual é o ano que você quer verificar?');
+			yearToBeVerified = yearToBeVerified === null || yearToBeVerified === '' ? NaN : Number(yearToBeVerified.replace('.', ','));
+			
+			if (isNaN(yearToBeVerified)) {
+				alert('Você informou um valor numérico inválido para ano!');
+				return;
+			}
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>Analisando o ano de ${yearToBeVerified}...</h2>`;
+			
+			if (yearToBeVerified % 4 === 0) { // Verifica se é ano bissexto
+				result.innerHTML += `<p>O ano de ${yearToBeVerified} <span class="is-leap-year">É BISSEXTO</span> \u{2705}</p>`;
+			} else {
+				result.innerHTML += `<p>O ano de ${yearToBeVerified} <span class="is-not-leap-year">NÃO É BISSEXTO</span> \u{274C}</p>`;
+			}
+		}
+	</script>
+</body>
+</html>

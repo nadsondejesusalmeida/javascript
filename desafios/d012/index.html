@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Preço mudou</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+		
+		#result {
+			margin-top: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Preço mudou</h1>
+	<button type="button" onclick="checkPriceVariation()">Verificar</button>
+	<div id="result">
+		Clique no botão acima para analisar a mudança de preço.
+	</div>
+	<script>
+		function checkPriceVariation() {
+			const result = document.querySelector('#result');
+			
+			let previousPrice = prompt('Qual era o preço anterior do produto?');
+			previousPrice = previousPrice === null || previousPrice === '' ? NaN : Number(previousPrice.replace(',', '.'));
+			
+			if (isNaN(previousPrice) || previousPrice <= 0) {
+				alert('Você não informou um valor válido do preço anterior!');
+				return;
+			}
+			
+			let currentPrice = prompt('Qual é o preço atual do produto?');
+			currentPrice = currentPrice === null || currentPrice === '' ? NaN : Number(currentPrice.replace(',', '.'));
+			
+			if (isNaN(currentPrice) || currentPrice <= 0) {
+				alert('Você não informou um valor válido do preço atual!');
+				return;
+			}
+			
+			previousPriceDisplay = previousPrice.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			currentPriceDisplay = currentPrice.toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			});
+			
+			if (previousPrice === currentPrice) {
+				alert('O preço anterior e o atual são o mesmo!');
+				return;
+			}
+			
+			let priceDifference;
+			let percentageChange;
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>Analisando os valores informados</h2>`;
+			result.innerHTML += `<p>O produto custava <strong >${previousPriceDisplay}</strong> e agora custa <strong>${currentPriceDisplay}</strong>.</p>`;
+			
+			if (previousPrice > currentPrice) { // Desconto
+				priceDifference = (previousPrice - currentPrice).toLocaleString('pt-BR', {
+					style: 'currency',
+					currency: 'BRL'
+				});
+				
+				percentageChange = ((currentPrice - previousPrice) / previousPrice) * 100;
+				percentageChange = Math.abs(percentageChange).toLocaleString('pt-BR', {
+					maximumFractionDigits: 2
+				});
+
+				
+				result.innerHTML += `<p>Hoje o produto está mais barato.</p>`;
+				result.innerHTML += `<p>O preço caiu <strong>${priceDifference}</strong> em relação ao preço anterior.</p>`;
+				result.innerHTML += `<p>Uma variação de <strong>${percentageChange}%</strong> pra baixo.<p>`;
+			} else { // Aumento
+				priceDifference = (currentPrice - previousPrice).toLocaleString('pt-BR', {
+					style: 'currency',
+					currency: 'BRL'
+				});
+				
+				percentageChange = ((currentPrice - previousPrice) / previousPrice) * 100;
+				percentageChange = percentageChange.toLocaleString('pt-BR', {
+					maximumFractionDigits: 2
+				});
+				
+				result.innerHTML += `<p>Hoje o produto está mais caro.</p>`;
+				result.innerHTML += `<p>O preço subiu <strong>${priceDifference}</strong> em relação ao preço anterior.</p>`;
+				result.innerHTML += `<p>Uma variação de <strong>${percentageChange}%</strong> pra cima.</p>`;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Situação do aluno</title>
+	<style>
+		button {
+			padding: 15px;
+		}
+		
+		#result {
+			margin-top: 15px;
+		}
+		
+		.failed,
+		.recovery,
+		.approved {
+			font-weight: bold;
+		}
+		
+		.failed {
+			background-color: #ED7F7E;
+			color: #95100E;
+		}
+		
+		.recovery {
+			color: #C3884C;
+		}
+		
+		.approved {
+			background-color: #8BEC89;
+			color: #118B11;
+		}
+	</style>
+</head>
+<body>
+	<h1>Situação do aluno</h1>
+	<button type="button" onclick="checkGrades()">Entrar com as notas</button>
+	<div id="result">
+		Clique no botão acima para informar as notas do aluno.
+	</div>
+	<script>
+		function checkGrades() {
+			const result = document.querySelector('#result');
+			const studentName = prompt('Qual é o nome do aluno?') || '"aluno desconhecido"';
+			let firstGrade = prompt(`Primeira nota de ${studentName}:`);
+			firstGrade = firstGrade === null || firstGrade === '' ? NaN : Number(firstGrade.replace(',', '.'));
+			
+			if (isNaN(firstGrade) || firstGrade < 0 || firstGrade > 10) {
+				alert('Você informou a primeira nota inválida!');
+				return;
+			}
+			
+			let secondGrade = prompt(`Segunda nota de ${studentName}:`);
+			secondGrade = secondGrade === null || secondGrade === '' ? NaN : Number(secondGrade.replace(',', '.'));
+			
+			if (isNaN(secondGrade) || secondGrade < 0 || secondGrade > 10) {
+				alert('Você informou a segunda nota inválida!');
+				return;
+			}
+			
+			let averageGrade = (firstGrade + secondGrade) / 2;
+			
+			const firstGradeDisplay = Math.abs(firstGrade).toLocaleString('pt-BR', {
+				minimumFractionDigits: 1
+			});
+			
+			const secondGradeDisplay = Math.abs(secondGrade).toLocaleString('pt-BR', {
+				minimumFractionDigits: 1
+			});
+			
+			const averageGradeDisplay = Math.abs(averageGrade).toLocaleString('pt-BR', {
+				minimumFractionDigits: 1
+			});
+			
+			result.innerHTML = '';
+			result.innerHTML = `<h2>Analisado a situação de ${studentName}</h2>`;
+			result.innerHTML += `<p>Com as notas ${firstGradeDisplay} e ${secondGradeDisplay}, a <strong>média é ${averageGradeDisplay}</strong></p>`;
+			
+			if (averageGrade < 3) { // Reprovado
+				result.innerHTML += `<p>Com média abaixo de 3,0, o aluno está <span class="failed">REPROVADO</span></p>`;
+			} else if (averageGrade >= 3 && averageGrade <= 6) { // Recuperação
+				result.innerHTML += `<p>Com média entre 3,0 e 6,0, o aluno está em <span class="recovery">RECUPERAÇÃO</span></p>`;
+			} else { // Aprovado
+				result.innerHTML += `<p>Com média acima de 6,0, o aluno está <span class="approved">APROVADO</span></p>`;
+			}
+		}
+	</script>
+</body>
+</html>

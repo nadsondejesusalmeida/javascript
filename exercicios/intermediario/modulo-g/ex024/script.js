@@ -1,4 +1,4 @@
-// Desafio: Sistema Bancário Ultra-Seguro
+// Sistema Bancário Ultra-Seguro
 
 const accountID = Symbol('id');
 const bankAccount = {

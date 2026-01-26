@@ -17,7 +17,7 @@ async function displayUserProfile(userId) {
 			console.error('Ocorreu um erro de conexão.')
 		}
 	} finally {
-		console.log('Tentativa de busca concluída.');
+		console.log('Tentativa de busca pelo ID do usuário concluída.');
 	}
 }
 
@@ -31,7 +31,7 @@ async function getActiveUserEmails() {
 	} catch (error) {
 		console.error(error.message);
 	} finally {
-		console.log('Finalizado a busca.');
+		console.log('Finalizado a busca de e-mails ativos.');
 	}
 }
 
@@ -51,6 +51,21 @@ function createUserCard(user) {
 	return div;
 }
 
+function saveUsers(users) {
+	localStorage.setItem('userList', JSON.stringify(users));
+}
+
+function loadStoredUsers() {
+	const rawData = localStorage.getItem('userList');
+	if (rawData) {
+		const users = JSON.parse(rawData);
+		 users.forEach(user => {
+			const card = createUserCard(user);
+			listContainer.appendChild(card);
+		 });
+	}
+}
+
 loadUserButton.addEventListener('click', async () => {
 	loadUserButton.disabled = true;
 	loadUserButton.textContent = 'Carregando...';
@@ -61,7 +76,9 @@ loadUserButton.addEventListener('click', async () => {
 		userList.forEach(user => {
 			const card = createUserCard(user);
 			listContainer.appendChild(card);
-		})
+		});
+		
+		saveUsers(userList);
 	} catch (error) {
 		alert('Não foi possível carregar os usuários no momento.');
 		console.error(error);
@@ -70,3 +87,5 @@ loadUserButton.addEventListener('click', async () => {
 		loadUserButton.textContent = 'Carregar Usuários';
 	}
 });
+
+loadStoredUsers();

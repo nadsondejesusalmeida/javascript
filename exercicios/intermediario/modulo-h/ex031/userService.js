@@ -19,6 +19,5 @@ export async function fetchUserList() {
 		throw error;
 	}
 	
-	
-	return response.json();
+	return await response.json();
 }

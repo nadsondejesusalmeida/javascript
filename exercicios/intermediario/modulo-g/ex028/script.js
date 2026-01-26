@@ -7,9 +7,9 @@ const students = [
 	{name: 'Duda', grade: 4}
 ];
 
-const namesOfApprovedStudents = students.filter(student => student.grade > 7).map(student => student.name.toUpperCase());
-const studentReport = students.reduce((accumulator, student) => {
-	if (student.grade > 7) {
+const namesOfApprovedStudents = students.filter(({ grade }) => grade > 7).map(({ name }) => name.toUpperCase());
+const studentReport = students.reduce((accumulator, { grade }) => {
+	if (grade > 7) {
 		accumulator.approved++;
 	} else {
 		accumulator.failed++;
